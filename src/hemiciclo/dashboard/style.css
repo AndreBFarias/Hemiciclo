@@ -1,0 +1,475 @@
+/* Hemiciclo dashboard -- estilo visual injetado em runtime.
+   Inspirado em stilingue-energisa-etl/dashboard/style.css com paleta sóbria
+   institucional não-partidária declarada em tema.py. */
+
+/* Fontes auto-hospedadas (S23.1):
+   Inter (4 pesos) + JetBrains Mono (2 pesos) bundladas em static/fonts/
+   sob SIL OFL 1.1. Zero CDN externa, zero rastreio (I1).
+   Os @font-face reais são injetados via base64 inline no app.py
+   (_carregar_fontes_inline). Aqui mantemos só o fallback CSS. */
+
+:root {
+    --azul-hemiciclo: #1E3A5F;
+    --azul-claro: #4A7BAB;
+    --amarelo-ouro: #D4A537;
+    --verde-folha: #3D7A3D;
+    --vermelho-argila: #A8403A;
+    --cinza-pedra: #4A4A4A;
+    --cinza-areia: #E8E4D8;
+    --branco-osso: #FAF8F3;
+
+    --fonte-corpo: 'Inter', system-ui, sans-serif;
+    --fonte-mono: 'JetBrains Mono', monospace;
+}
+
+/* Esconde chrome do Streamlit (menu, botões deploy, header default). */
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+header[data-testid="stHeader"] { visibility: hidden; }
+.stDeployButton { display: none; }
+[data-testid="stToolbar"] { display: none; }
+
+/* Corpo principal */
+.stApp {
+    font-family: var(--fonte-corpo);
+    background-color: var(--branco-osso);
+    color: var(--cinza-pedra);
+}
+
+.main .block-container {
+    padding: 1rem 2rem 4rem 2rem;
+    max-width: 1280px;
+}
+
+/* Header global */
+.hemiciclo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0 0.5rem 0;
+    border-bottom: 2px solid var(--cinza-areia);
+    margin-bottom: 1.5rem;
+}
+
+.hemiciclo-titulo {
+    font-family: var(--fonte-corpo);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--azul-hemiciclo);
+    letter-spacing: -0.5px;
+}
+
+.hemiciclo-tagline {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--cinza-pedra);
+    opacity: 0.75;
+    margin-left: 0.75rem;
+}
+
+.hemiciclo-versao {
+    font-family: var(--fonte-mono);
+    font-size: 0.75rem;
+    color: var(--cinza-pedra);
+    opacity: 0.6;
+    align-self: center;
+}
+
+/* Storytelling (parágrafo introdutório por aba) */
+.hemiciclo-storytelling {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--cinza-pedra);
+    line-height: 1.55;
+    margin: 0.5rem 0 1.75rem 0;
+    max-width: 720px;
+}
+
+/* Botões de navegação principal */
+div[data-testid="stHorizontalBlock"] > div > div > .stButton > button {
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1.4rem;
+    font-family: var(--fonte-corpo);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    width: 100%;
+}
+
+div[data-testid="stHorizontalBlock"] > div > div > .stButton > button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(30, 58, 95, 0.18);
+}
+
+/* Cards de sessão */
+.hemiciclo-card-sessao {
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 1.1rem 1.3rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--azul-hemiciclo);
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.hemiciclo-card-sessao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(30, 58, 95, 0.12);
+}
+
+.hemiciclo-card-titulo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--azul-hemiciclo);
+    margin-bottom: 0.3rem;
+}
+
+.hemiciclo-card-meta {
+    font-size: 0.85rem;
+    color: var(--cinza-pedra);
+    opacity: 0.75;
+    margin-bottom: 0.5rem;
+}
+
+.hemiciclo-badge {
+    display: inline-block;
+    padding: 0.18rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.hemiciclo-badge-criada     { background: var(--cinza-areia); color: var(--cinza-pedra); }
+.hemiciclo-badge-coletando  { background: var(--azul-claro); color: white; }
+.hemiciclo-badge-etl        { background: var(--azul-claro); color: white; }
+.hemiciclo-badge-embeddings { background: var(--amarelo-ouro); color: var(--cinza-pedra); }
+.hemiciclo-badge-modelando  { background: var(--amarelo-ouro); color: var(--cinza-pedra); }
+.hemiciclo-badge-concluida  { background: var(--verde-folha); color: white; }
+.hemiciclo-badge-erro       { background: var(--vermelho-argila); color: white; }
+.hemiciclo-badge-interrompida { background: var(--vermelho-argila); color: white; }
+.hemiciclo-badge-pausada    { background: var(--cinza-areia); color: var(--cinza-pedra); }
+
+/* CTA primeira pesquisa */
+.hemiciclo-cta-vazio {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: #FFFFFF;
+    border-radius: 14px;
+    border: 1px dashed var(--azul-claro);
+    margin: 2rem 0;
+}
+
+.hemiciclo-cta-titulo {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--azul-hemiciclo);
+    margin-bottom: 0.8rem;
+}
+
+.hemiciclo-cta-subtitulo {
+    font-size: 0.95rem;
+    color: var(--cinza-pedra);
+    opacity: 0.75;
+    margin-bottom: 1.5rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Footer global */
+.hemiciclo-footer {
+    border-top: 1px solid var(--cinza-areia);
+    margin-top: 3rem;
+    padding-top: 1rem;
+    font-family: var(--fonte-mono);
+    font-size: 0.75rem;
+    color: var(--cinza-pedra);
+    opacity: 0.6;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Manifesto (página sobre) */
+.hemiciclo-manifesto {
+    font-family: var(--fonte-corpo);
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: var(--cinza-pedra);
+    max-width: 720px;
+}
+
+.hemiciclo-manifesto h2,
+.hemiciclo-manifesto h3 {
+    color: var(--azul-hemiciclo);
+    margin-top: 1.6rem;
+}
+
+/* ------------------------------------------------------------------
+   Componentes nativos do Streamlit (S38.5)
+   ------------------------------------------------------------------
+   Streamlit injeta CSS depois do user CSS via <style>. Para sobrepor
+   defaults pretos/vermelhos é preciso seletores específicos +
+   `!important` em algumas regras. Pinamos `streamlit >= 1.40` no
+   pyproject -- selectors `[data-baseweb]` e `[data-testid]`
+   permanecem estáveis nessa faixa de versões.
+   ------------------------------------------------------------------ */
+
+/* Forms ------------------------------------------------------------ */
+
+/* Labels de formulário em azul institucional, peso semibold. */
+[data-testid="stForm"] label,
+[data-testid="stForm"] label p,
+.stTextInput label,
+.stTextArea label,
+.stSelectbox label,
+.stMultiSelect label,
+.stDateInput label,
+.stNumberInput label,
+.stRadio label,
+.stCheckbox label {
+    color: var(--azul-hemiciclo) !important;
+    font-weight: 600 !important;
+}
+
+/* Texto de "help" (tooltip) abaixo de labels. */
+[data-testid="stForm"] [data-testid="stTooltipHoverTarget"],
+[data-testid="stForm"] small {
+    color: var(--cinza-pedra) !important;
+    opacity: 0.75;
+}
+
+/* Selectbox / Multiselect ----------------------------------------- */
+
+/* Container fechado: fundo branco-osso + borda areia. */
+[data-baseweb="select"] > div,
+[data-baseweb="select"] > div:hover {
+    background-color: #FFFFFF !important;
+    border-color: var(--cinza-areia) !important;
+    color: var(--cinza-pedra) !important;
+}
+
+[data-baseweb="select"] input,
+[data-baseweb="select"] [class*="ValueContainer"] {
+    color: var(--cinza-pedra) !important;
+    background-color: transparent !important;
+}
+
+/* Placeholder ("Selecione..." / "Choose options"). */
+[data-baseweb="select"] [class*="placeholder"],
+[data-baseweb="select"] div[role="combobox"] [aria-hidden="true"] {
+    color: var(--cinza-pedra) !important;
+    opacity: 0.55 !important;
+    font-style: normal;
+}
+
+/* Dropdown aberto (popover do select/multiselect). */
+[data-baseweb="popover"],
+[data-baseweb="popover"] [role="listbox"],
+[data-baseweb="popover"] ul {
+    background-color: var(--branco-osso) !important;
+    color: var(--cinza-pedra) !important;
+    border: 1px solid var(--cinza-areia) !important;
+}
+
+[data-baseweb="popover"] [role="option"],
+[data-baseweb="popover"] li {
+    background-color: var(--branco-osso) !important;
+    color: var(--cinza-pedra) !important;
+}
+
+[data-baseweb="popover"] [role="option"]:hover,
+[data-baseweb="popover"] [aria-selected="true"],
+[data-baseweb="popover"] li:hover {
+    background-color: var(--cinza-areia) !important;
+    color: var(--azul-hemiciclo) !important;
+}
+
+/* Tags do multiselect: AZUL_CLARO com texto branco (jamais vermelho). */
+[data-baseweb="tag"] {
+    background-color: var(--azul-claro) !important;
+    color: #FFFFFF !important;
+    border-color: var(--azul-claro) !important;
+}
+
+[data-baseweb="tag"] span,
+[data-baseweb="tag"] svg {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+}
+
+[data-baseweb="tag"]:hover {
+    background-color: var(--azul-hemiciclo) !important;
+    border-color: var(--azul-hemiciclo) !important;
+}
+
+/* Date input ------------------------------------------------------- */
+
+[data-testid="stDateInput"] > div > div,
+[data-testid="stDateInput"] input {
+    background-color: #FFFFFF !important;
+    color: var(--cinza-pedra) !important;
+    border-color: var(--cinza-areia) !important;
+}
+
+[data-testid="stDateInput"] [data-baseweb="input"] {
+    background-color: #FFFFFF !important;
+    border-color: var(--cinza-areia) !important;
+}
+
+/* Calendário pop-up. */
+[data-baseweb="calendar"] {
+    background-color: var(--branco-osso) !important;
+    color: var(--cinza-pedra) !important;
+}
+
+[data-baseweb="calendar"] [aria-selected="true"] {
+    background-color: var(--azul-hemiciclo) !important;
+    color: #FFFFFF !important;
+}
+
+/* Text input / Text area ------------------------------------------ */
+
+[data-testid="stTextInput"] input,
+[data-testid="stTextArea"] textarea,
+.stTextInput input,
+.stTextArea textarea {
+    background-color: #FFFFFF !important;
+    color: var(--cinza-pedra) !important;
+    border-color: var(--cinza-areia) !important;
+}
+
+[data-testid="stTextInput"] input:focus,
+[data-testid="stTextArea"] textarea:focus {
+    border-color: var(--azul-hemiciclo) !important;
+    box-shadow: 0 0 0 2px rgba(30, 58, 95, 0.15) !important;
+}
+
+/* Botões ----------------------------------------------------------- */
+
+/* Botão primary (CTA): AMARELO_OURO sólido com texto azul-marinho. */
+.stButton > button[kind="primary"],
+.stFormSubmitButton > button[kind="primary"],
+button[data-testid="baseButton-primary"],
+button[data-testid="baseButton-primaryFormSubmit"] {
+    background-color: var(--amarelo-ouro) !important;
+    color: var(--azul-hemiciclo) !important;
+    border: 2px solid var(--amarelo-ouro) !important;
+    font-weight: 700 !important;
+}
+
+.stButton > button[kind="primary"]:hover,
+.stFormSubmitButton > button[kind="primary"]:hover,
+button[data-testid="baseButton-primary"]:hover,
+button[data-testid="baseButton-primaryFormSubmit"]:hover {
+    background-color: var(--azul-hemiciclo) !important;
+    color: var(--amarelo-ouro) !important;
+    border-color: var(--azul-hemiciclo) !important;
+}
+
+/* Botão secondary: contorno azul, texto azul. */
+.stButton > button[kind="secondary"],
+.stFormSubmitButton > button[kind="secondary"],
+button[data-testid="baseButton-secondary"] {
+    background-color: #FFFFFF !important;
+    color: var(--azul-hemiciclo) !important;
+    border: 1px solid var(--azul-hemiciclo) !important;
+}
+
+.stButton > button[kind="secondary"]:hover,
+button[data-testid="baseButton-secondary"]:hover {
+    background-color: var(--cinza-areia) !important;
+    color: var(--azul-hemiciclo) !important;
+}
+
+/* Tabelas / DataFrame --------------------------------------------- */
+
+/* Cabeçalho do dataframe: AZUL_HEMICICLO + texto branco. */
+[data-testid="stDataFrame"] [role="columnheader"],
+[data-testid="stDataFrame"] thead th {
+    background-color: var(--azul-hemiciclo) !important;
+    color: #FFFFFF !important;
+    font-weight: 600 !important;
+    border-bottom: 2px solid var(--amarelo-ouro) !important;
+}
+
+[data-testid="stDataFrame"] [role="row"]:nth-child(odd) [role="gridcell"] {
+    background-color: var(--branco-osso) !important;
+}
+
+[data-testid="stDataFrame"] [role="row"]:nth-child(even) [role="gridcell"] {
+    background-color: var(--cinza-areia) !important;
+}
+
+[data-testid="stDataFrame"] [role="gridcell"] {
+    color: var(--cinza-pedra) !important;
+}
+
+/* Barras das ProgressColumns (Score) em VERDE_FOLHA, não vermelho. */
+[data-testid="stDataFrame"] [data-testid*="progress"],
+[data-testid="stDataFrame"] [class*="progress-bar"],
+[data-testid="stDataFrame"] [class*="ProgressBar"] {
+    background-color: var(--verde-folha) !important;
+    color: var(--verde-folha) !important;
+}
+
+/* Ícone de filtro/ordenação no header da tabela em branco para
+   contrastar com o fundo azul-marinho. */
+[data-testid="stDataFrame"] [role="columnheader"] svg {
+    color: #FFFFFF !important;
+    fill: #FFFFFF !important;
+}
+
+/* Code inline ------------------------------------------------------ */
+
+[data-testid="stMarkdownContainer"] code {
+    background-color: var(--cinza-areia) !important;
+    color: var(--azul-hemiciclo) !important;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-family: var(--fonte-mono);
+    font-size: 0.88em;
+}
+
+/* Alertas (info / success / warning / error) ---------------------- */
+
+[data-testid="stAlert"] {
+    background-color: var(--cinza-areia) !important;
+    color: var(--cinza-pedra) !important;
+    border-left: 4px solid var(--azul-hemiciclo) !important;
+}
+
+[data-testid="stAlertContentSuccess"],
+div[data-baseweb="notification"][kind="positive"] {
+    border-left-color: var(--verde-folha) !important;
+}
+
+[data-testid="stAlertContentError"],
+div[data-baseweb="notification"][kind="negative"] {
+    border-left-color: var(--vermelho-argila) !important;
+}
+
+[data-testid="stAlertContentWarning"],
+div[data-baseweb="notification"][kind="warning"] {
+    border-left-color: var(--amarelo-ouro) !important;
+}
+
+/* Spinner / status do polling ------------------------------------- */
+
+[data-testid="stSpinner"] > div {
+    border-top-color: var(--amarelo-ouro) !important;
+    border-right-color: var(--azul-claro) !important;
+}
+
+/* Responsividade até 1024px */
+@media (max-width: 1024px) {
+    .main .block-container { padding: 1rem; }
+    .hemiciclo-titulo { font-size: 1.3rem; }
+    .hemiciclo-tagline { display: none; }
+}

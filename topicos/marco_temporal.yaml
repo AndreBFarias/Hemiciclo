@@ -1,0 +1,45 @@
+nome: marco_temporal
+versao: 1
+mantenedor: comunidade
+descricao_curta: "Pauta sobre o marco temporal para demarcação de terras indígenas -- tese segundo a qual só seriam reconhecidas terras ocupadas em 5 de outubro de 1988 (promulgação da Constituição). Inclui PL 2903/2023 e ADI no STF."
+keywords:
+  - marco temporal
+  - demarcacao de terras indigenas
+  - terras indigenas
+  - povos originarios
+  - povos indigenas
+  - funai
+  - reserva indigena
+  - posse imemorial
+  - direito originario
+regex:
+  - "(?i)marco\\s+temporal"
+  - "(?i)demarca[çc][ãa]o\\s+(?:de\\s+)?terras?\\s+ind[íi]gena(?:s)?"
+  - "(?i)povos\\s+(?:ind[íi]genas?|origin[áa]rios)"
+  - "(?i)posse\\s+imemorial"
+categorias_oficiais_camara:
+  - "Direitos Humanos, Minorias e Cidadania"
+  - "Indígenas"
+  - "Meio Ambiente e Recursos Naturais"
+categorias_oficiais_senado:
+  - "Direitos Humanos"
+  - "Meio Ambiente"
+proposicoes_seed:
+  - sigla: PL
+    numero: 2903
+    ano: 2023
+    casa: camara
+    posicao_implicita: a_favor
+  - sigla: PEC
+    numero: 48
+    ano: 2023
+    casa: senado
+    posicao_implicita: a_favor
+exclusoes:
+  - regex: "(?i)marco\\s+(?:civil|legal|regulat[óo]rio)\\s+(?:da|de|do)"
+    motivo: "Outros 'marcos' (Marco Civil da Internet, marco legal da inovação, etc.) não são desta pauta."
+embeddings_seed:
+  - "marco temporal da demarcacao indigena"
+  - "tese do marco temporal no STF"
+  - "direitos originarios dos povos indigenas"
+limiar_similaridade: 0.62

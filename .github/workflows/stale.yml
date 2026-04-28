@@ -1,0 +1,37 @@
+name: Stale Issues and PRs
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    name: Marcar e fechar inativos
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Stale action
+        uses: actions/stale@v9
+        with:
+          days-before-stale: 90
+          days-before-close: 14
+          stale-issue-label: "stale"
+          stale-pr-label: "stale"
+          stale-issue-message: >-
+            Esta issue ficou sem atividade nos ultimos 90 dias e foi marcada
+            como stale. Sera fechada em 14 dias se nao houver novas atualizacoes.
+            Comente ou remova o label para mante-la aberta.
+          stale-pr-message: >-
+            Este PR ficou sem atividade nos ultimos 90 dias e foi marcado como
+            stale. Sera fechado em 14 dias se nao houver novas atualizacoes.
+          close-issue-message: >-
+            Fechado por inatividade. Reabra se ainda for relevante.
+          close-pr-message: >-
+            Fechado por inatividade. Reabra se ainda for relevante.
+          exempt-issue-labels: "pinned,security,roadmap"
+          exempt-pr-labels: "pinned,security"
+          operations-per-run: 50

@@ -1,0 +1,54 @@
+nome: porte_armas
+versao: 1
+mantenedor: comunidade
+descricao_curta: "Pauta sobre posse e porte de armas de fogo por civis, Estatuto do Desarmamento, decretos presidenciais que ampliam ou restringem o acesso, e categorias de CACs (caçadores, atiradores, colecionadores)."
+keywords:
+  - porte de arma
+  - posse de arma
+  - estatuto do desarmamento
+  - desarmamento
+  - armamentista
+  - armamento civil
+  - cac
+  - cacador atirador colecionador
+  - sinarm
+  - sigma
+  - registro de arma
+  - municao
+  - calibre
+regex:
+  - "(?i)(?:porte|posse)\\s+(?:de\\s+)?arma(?:s)?\\s+(?:de\\s+fogo|legal|civil)?"
+  - "(?i)estatuto\\s+do\\s+desarmamento"
+  - "(?i)cacadores?\\s*,?\\s*atiradores?\\s*(?:e|,)\\s*colecionadores?"
+  - "(?i)decretos?\\s+(?:de\\s+)?armament(?:o|ista)"
+  - "(?i)(?:flexibiliza[çc][ãa]o|restri[çc][ãa]o)\\s+(?:de|do|ao)\\s+(?:porte|acesso)\\s+(?:a|de)\\s+arma"
+categorias_oficiais_camara:
+  - "Segurança Pública"
+  - "Defesa Nacional"
+categorias_oficiais_senado:
+  - "Segurança Pública"
+  - "Defesa Nacional"
+proposicoes_seed:
+  - sigla: PL
+    numero: 3723
+    ano: 2019
+    casa: camara
+    posicao_implicita: a_favor
+  - sigla: PDL
+    numero: 4
+    ano: 2023
+    casa: camara
+    posicao_implicita: contra
+  - sigla: PL
+    numero: 6438
+    ano: 2019
+    casa: camara
+    posicao_implicita: a_favor
+exclusoes:
+  - regex: "(?i)arma\\s+(?:branca|qu[ií]mica|biol[óo]gica|nuclear)"
+    motivo: "Outras categorias de arma fora da pauta civil de porte."
+embeddings_seed:
+  - "flexibilizacao do porte de armas para civis"
+  - "controle estatal sobre armamento civil"
+  - "categoria de cac e regulamentacao"
+limiar_similaridade: 0.60

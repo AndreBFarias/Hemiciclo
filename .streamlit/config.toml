@@ -1,0 +1,21 @@
+# Tema institucional Hemiciclo (S38.5).
+#
+# Cores espelham `src/hemiciclo/dashboard/tema.py`. Manter sincronizado
+# com aquele módulo é responsabilidade de quem altera a paleta -- a
+# fonte da verdade é o código Python; este arquivo é a aplicação para o
+# Streamlit (que precisa do TOML para pintar componentes nativos antes
+# do CSS injetado em runtime).
+
+[theme]
+base = "light"
+primaryColor = "#D4A537"              # AMARELO_OURO -- CTA primary
+backgroundColor = "#FAF8F3"           # BRANCO_OSSO -- fundo principal
+secondaryBackgroundColor = "#E8E4D8"  # CINZA_AREIA -- fundo secundário
+textColor = "#4A4A4A"                 # CINZA_PEDRA -- texto neutro
+font = "sans serif"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false
