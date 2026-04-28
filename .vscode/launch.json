@@ -1,0 +1,39 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Streamlit dashboard",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "streamlit",
+      "args": [
+        "run",
+        "${workspaceFolder}/src/hemiciclo/dashboard/app.py"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "CLI: hemiciclo info",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "hemiciclo",
+      "args": [
+        "info"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    },
+    {
+      "name": "CLI: hemiciclo --version",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "hemiciclo",
+      "args": [
+        "--version"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ]
+}

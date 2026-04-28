@@ -1,0 +1,101 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, macos-14, windows-2022]
+        python: ["3.11", "3.12"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Install Python ${{ matrix.python }}
+        run: uv python install ${{ matrix.python }}
+
+      - name: Sync dependencies
+        run: uv sync --frozen --all-extras
+
+      - name: Validar ADRs
+        run: uv run python scripts/validar_adr.py
+
+      - name: Validar tópicos
+        run: uv run python scripts/validar_topicos.py
+
+      - name: Ruff check
+        run: uv run ruff check src tests
+
+      - name: Ruff format check
+        run: uv run ruff format --check src tests
+
+      - name: Mypy strict
+        run: uv run mypy --strict src
+
+      - name: Pytest unit + integracao
+        run: uv run pytest tests/unit tests/integracao --cov=src/hemiciclo --cov-report=xml --cov-report=term-missing
+
+      - name: Upload coverage to Codecov
+        if: matrix.os == 'ubuntu-22.04' && matrix.python == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+
+  smoke-install-windows:
+    name: Smoke install.bat (windows-2022)
+    runs-on: windows-2022
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: install.bat --check (modo seco)
+        shell: cmd
+        run: install.bat --check
+
+      - name: install.bat completo
+        shell: cmd
+        run: install.bat
+
+      - name: Sanidade CLI hemiciclo
+        shell: cmd
+        run: uv run hemiciclo --version
+
+      - name: Asserção versão
+        shell: pwsh
+        run: |
+          $output = uv run hemiciclo --version
+          if ($output -notmatch "hemiciclo 2\.\d+\.\d+") {
+            Write-Error "Versão inesperada: $output"
+            exit 1
+          }
+          Write-Output "Versão OK: $output"

@@ -1,0 +1,39 @@
+Package: hemiciclo
+Type: Application
+Title: Hemiciclo -- Ranking de Parlamentares por Discursos e Projetos
+Version: 2.0.0
+Authors@R: person("Andre", "Farias", email = "andre.dsbf@gmail.com", role = c("aut", "cre"))
+Description: Coleta discursos e projetos do Congresso Brasileiro via API
+    Dados Abertos (Camara e Senado), processa textos e gera rankings de
+    deputados e senadores com score ponderado por produtividade legislativa
+    e atividade discursiva.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 4.0)
+SystemRequirements:
+    libcurl4-openssl-dev, libxml2-dev, libssl-dev
+Imports:
+    dplyr,
+    tidyverse,
+    purrr,
+    readr,
+    readxl,
+    writexl,
+    stringr,
+    glue,
+    lubridate,
+    jsonlite,
+    httr,
+    rvest,
+    RCurl,
+    xml2,
+    doMC,
+    foreach
+Suggests:
+    testthat (>= 3.0.0),
+    lintr
+Config/testthat/edition: 3
+URL: https://github.com/AndreBFarias/Hemiciclo
+BugReports: https://github.com/AndreBFarias/Hemiciclo/issues

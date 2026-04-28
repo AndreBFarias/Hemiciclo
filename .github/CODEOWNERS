@@ -1,0 +1,5 @@
+# CODEOWNERS -- regras automaticas de revisao
+# Documentacao: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default global -- toda mudanca exige revisao do mantenedor.
+*       @AndreBFarias

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Discussions
+    url: https://github.com/AndreBFarias/Hemiciclo/discussions
+    about: Para perguntas abertas, propostas em fase de brainstorming e duvidas de uso.
+  - name: Seguranca
+    url: https://github.com/AndreBFarias/Hemiciclo/blob/main/SECURITY.md
+    about: Reporte vulnerabilidades de forma privada conforme SECURITY.md.

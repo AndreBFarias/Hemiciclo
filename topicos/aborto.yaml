@@ -1,0 +1,68 @@
+nome: aborto
+versao: 1
+mantenedor: comunidade
+descricao_curta: "Pauta sobre interrupção da gravidez no ordenamento jurídico brasileiro -- legalização, criminalização, exceções (estupro, anencefalia, risco materno) e financiamento público."
+keywords:
+  - aborto
+  - aborto legal
+  - aborto terapeutico
+  - interrupcao da gravidez
+  - interrupcao voluntaria
+  - estatuto do nascituro
+  - direito ao nascimento
+  - direitos reprodutivos
+  - anencefalia
+  - violencia sexual
+  - planejamento familiar
+  - saude reprodutiva
+regex:
+  - "(?i)aborto\\s+(?:legal|terap[êe]utico|provocado|seguro|inseguro)"
+  - "(?i)interrup[çc][ãa]o\\s+(?:vol[ui]nt[áa]ria|legal|terap[êe]utica)\\s+(?:da|de)\\s+gravidez"
+  - "(?i)estatuto\\s+do\\s+nascituro"
+  - "(?i)direitos\\s+reprodutivos"
+  - "(?i)gravidez\\s+(?:resultante\\s+de\\s+estupro|de\\s+anenc[ée]falo)"
+  - "(?i)saude\\s+sexual\\s+e\\s+reprodutiva"
+categorias_oficiais_camara:
+  - "Direitos Humanos, Minorias e Cidadania"
+  - "Saúde"
+  - "Mulher"
+categorias_oficiais_senado:
+  - "Direitos Humanos"
+  - "Saúde"
+proposicoes_seed:
+  - sigla: PL
+    numero: 1904
+    ano: 2024
+    casa: camara
+    posicao_implicita: contra
+  - sigla: PL
+    numero: 882
+    ano: 2015
+    casa: camara
+    posicao_implicita: contra
+  - sigla: PL
+    numero: 5069
+    ano: 2013
+    casa: camara
+    posicao_implicita: contra
+  - sigla: PEC
+    numero: 29
+    ano: 2015
+    casa: senado
+    posicao_implicita: contra
+  - sigla: PL
+    numero: 1135
+    ano: 1991
+    casa: camara
+    posicao_implicita: a_favor
+exclusoes:
+  - regex: "(?i)aborto\\s+espont[âa]neo"
+    motivo: "Aborto espontâneo é evento médico, não pauta política."
+  - regex: "(?i)aborto\\s+(?:da|de|do)\\s+(?:projeto|emenda|proposta|plano|texto)"
+    motivo: "Uso metafórico ('aborto da emenda') não trata da pauta."
+embeddings_seed:
+  - "legalizacao do aborto no Brasil"
+  - "criminalizacao da interrupcao da gravidez"
+  - "direitos reprodutivos da mulher"
+  - "exclusao de ilicitude penal por estupro"
+limiar_similaridade: 0.62

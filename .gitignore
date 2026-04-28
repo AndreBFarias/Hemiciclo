@@ -1,0 +1,101 @@
+# Dados de saida
+data/
+*.csv
+*.xlsx
+*.rds
+
+# Configs locais de agente (efêmero, não versionar)
+.claude/
+
+# JSON de dados brutos (mas permite configs explícitas de devcontainer/vscode/scripts)
+/*.json
+/data/**/*.json
+
+# R especifico (preservado de v1; sera removido ao desativar codigo R)
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+.Rapp.history
+.RDataTmp
+
+# renv
+renv/library/
+renv/local/
+renv/cellar/
+renv/lock/
+renv/python/
+renv/staging/
+
+# Python -- bytecode e cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+MANIFEST
+
+# Python -- venvs
+.venv/
+venv/
+env/
+ENV/
+
+# uv
+.uv-cache/
+
+# pytest, coverage, mypy, ruff
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+dmypy.json
+
+# Build artifacts
+build/
+dist/
+*.whl
+*.tar.gz
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Hemiciclo runtime (nao deve ser commitado; vive em ~/hemiciclo do usuario)
+hemiciclo_home/
+*.duckdb
+*.duckdb-wal
+*.parquet
+*.pkl
+
+# Sistema
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Logs
+*.log
+logs/
+
+# Evidencias de desenvolvimento
+CLAUDE.md
+KIMI.md
+Dev_log/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem

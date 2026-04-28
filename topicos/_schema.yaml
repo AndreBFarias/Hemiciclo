@@ -1,0 +1,111 @@
+# JSON Schema (draft 2020-12) que descreve a estrutura de um tópico do
+# Hemiciclo. Lido por scripts/validar_topicos.py e por
+# src/hemiciclo/etl/topicos.py em runtime.
+#
+# Convenção: arquivos `topicos/<slug>.yaml` (slug ASCII em snake_case)
+# valem como tópico. O `_schema.yaml` (este arquivo) NÃO é um tópico.
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://hemiciclo.local/schemas/topico.yaml"
+title: "Tópico do Hemiciclo"
+description: "Especificação de um tópico (pauta política) classificável pelo motor multicamada."
+type: object
+required:
+  - nome
+  - versao
+  - descricao_curta
+  - keywords
+  - regex
+additionalProperties: false
+properties:
+  nome:
+    type: string
+    pattern: "^[a-z0-9_]+$"
+    minLength: 2
+    maxLength: 60
+    description: "Slug ASCII snake_case. Bate com o nome do arquivo (sem extensão)."
+  versao:
+    type: integer
+    minimum: 1
+    description: "Versão semântica simples do YAML (incrementa a cada edição relevante)."
+  mantenedor:
+    type: string
+    description: "Comunidade ou usuário responsável pela curadoria do tópico."
+  descricao_curta:
+    type: string
+    minLength: 10
+    maxLength: 280
+    description: "Resumo PT-BR (1-2 frases) do que o tópico cobre."
+  keywords:
+    type: array
+    minItems: 1
+    items:
+      type: string
+      minLength: 2
+    uniqueItems: true
+    description: "Termos literais (case-insensitive) para match em ementa/discurso."
+  regex:
+    type: array
+    minItems: 1
+    items:
+      type: string
+      minLength: 2
+    description: "Padrões regex Python (re.compile). Use prefixo (?i) para ignorar caixa."
+  categorias_oficiais_camara:
+    type: array
+    items:
+      type: string
+    uniqueItems: true
+    description: "Temas oficiais da Câmara (campo tema_oficial em proposicoes)."
+  categorias_oficiais_senado:
+    type: array
+    items:
+      type: string
+    uniqueItems: true
+    description: "Temas oficiais do Senado."
+  proposicoes_seed:
+    type: array
+    items:
+      type: object
+      required: [sigla, numero, ano, casa]
+      additionalProperties: false
+      properties:
+        sigla:
+          type: string
+          minLength: 1
+        numero:
+          type: integer
+          minimum: 1
+        ano:
+          type: integer
+          minimum: 1988
+          maximum: 2100
+        casa:
+          type: string
+          enum: [camara, senado]
+        posicao_implicita:
+          type: string
+          enum: [a_favor, contra, neutro]
+    description: "Proposições conhecidas como exemplos canônicos do tópico."
+  exclusoes:
+    type: array
+    items:
+      type: object
+      required: [regex]
+      additionalProperties: false
+      properties:
+        regex:
+          type: string
+          minLength: 2
+        motivo:
+          type: string
+    description: "Padrões que desclassificam falsos positivos (ex: 'aborto espontâneo')."
+  embeddings_seed:
+    type: array
+    items:
+      type: string
+    description: "Frases-âncora para C3 (S28+). C1+C2 ignora."
+  limiar_similaridade:
+    type: number
+    minimum: 0.0
+    maximum: 1.0
+    description: "Limiar de cosseno para C3 (S28+). C1+C2 ignora."
