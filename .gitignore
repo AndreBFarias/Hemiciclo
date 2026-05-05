@@ -99,3 +99,19 @@ Dev_log/
 !.env.example
 *.key
 *.pem
+
+# --- anti-IA (anonimato local) ---
+AGENTS.md
+GEMINI.md
+COPILOT.md
+HANDOFF-PROMPT.md
+HANDOFF.md
+HOW_TO_RESUME.md
+VALIDATOR_BRIEF.md
+STATE.md
+.cursorrules
+.windsurfrules
+.cursor/
+.aider*
+.continue/
+.github/copilot-instructions.md
